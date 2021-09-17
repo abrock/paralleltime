@@ -14,6 +14,7 @@ public:
     void start();
     void stop();
     std::string print();
+    std::string printms();
     double realTime();
     double cpuTime();
     double parallelisation();
