@@ -60,16 +60,21 @@ std::string ParallelTime::functionName(std::string const & name)
   return name.substr(0, name.find_first_of("("));
 }
 
+void ParallelTime::display(const std::string &comment)
+{
+  if (comment.empty()) {
+    std::cout << "Time: " << print() << std::endl;
+  }
+  else {
+    std::cout << "Time for " << comment << ": " << print() << std::endl;
+  }
+}
+
 ParallelTimeAutoStop::ParallelTimeAutoStop(const std::string &_comment) : comment(_comment)
 {
 }
 
 ParallelTimeAutoStop::~ParallelTimeAutoStop()
 {
-  if (comment.empty()) {
-    std::cout << "Time: " << t.print() << std::endl;
-  }
-  else {
-    std::cout << "Time for " << comment << ": " << t.print() << std::endl;
-  }
+  t.display(comment);
 }

@@ -21,6 +21,8 @@ public:
     double parallelisation();
 
     static std::string functionName(const std::string &name);
+
+    void display(std::string const & comment = "");
 };
 
 class ParallelTimeAutoStop
