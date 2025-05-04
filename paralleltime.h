@@ -3,6 +3,7 @@
 
 #include <chrono>
 #include <string>
+#include <iostream>
 
 class ParallelTime
 {
@@ -18,6 +19,30 @@ public:
     double realTime();
     double cpuTime();
     double parallelisation();
+
+    static std::string functionName(const std::string &name);
 };
+
+class ParallelTimeAutoStop
+{
+public:
+  std::string comment;
+
+  ParallelTimeAutoStop(std::string const & _comment = "");
+
+  ~ParallelTimeAutoStop();
+
+private:
+
+  ParallelTime t;
+};
+
+#define PARALLELTIME_EXEC(code) \
+  t.start(); \
+  code; \
+  std::cout << "Time for " << #code << ": " << t.print() << std::endl;
+
+#define PARALLELTIME_FUNCTION() \
+  ParallelTimeAutoStop paralleltime_auto_stop_object{ParallelTime::functionName(__PRETTY_FUNCTION__)};
 
 #endif // PARALLELTIME_H
